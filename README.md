@@ -57,3 +57,12 @@ This application addresses a critical pain point in the printing press industry:
 - **Dynamic Pricing**: The app allows admin users to update price settings dynamically via an admin panel, ensuring adaptability to market changes.
 - **Real-World Impact**: Streamlines operations for printing press businesses, enabling them to handle more jobs efficiently.
 
+## SnapShots :-
+Home Page
+![image](https://github.com/user-attachments/assets/f689a0e1-ff36-4b88-b275-4b41adde896a)
+
+Printing Calculator Section 
+![image](https://github.com/user-attachments/assets/eefaa45d-2009-4ca6-b9ab-f1955810622e)
+
+MultiColor Calculator Section
+![image](https://github.com/user-attachments/assets/bf4a7a13-cfb4-4322-8a42-01aef35b3ee3)
