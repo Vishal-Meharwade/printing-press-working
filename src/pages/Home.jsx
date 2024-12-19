@@ -79,7 +79,7 @@ const Home = () => {
               transition={{ delay: 0.5, duration: 0.7 }}
             >
               Streamline your printing workflow with intelligent cost
-              estimation, design precision, and instant project insights.
+              estimation in just minutes.
             </motion.p>
           </motion.div>
 
