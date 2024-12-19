@@ -19,7 +19,7 @@ const App = () => {
             <Route path="/multicolor" element={<MulticolorSection />} />
             <Route path="/admin" element={<AdminPanel />} />
           </Routes>
-        </main>
+        </main> 
         <Footer />
       </div>
     </Router>

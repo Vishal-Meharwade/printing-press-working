@@ -142,16 +142,26 @@ const MulticolorSection = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-blue-100 py-12 px-4 sm:px-6 lg:px-8">
+    <div className="relative min-h-screen bg-gradient-to-br from-stone-100 to-stone-200 py-12 px-4 sm:px-6 lg:px-8 overflow-hidden">
+      {/* Subtle Background Texture */}
+      <div
+        className="absolute inset-0 opacity-10 pointer-events-none"
+        style={{
+          backgroundImage: "radial-gradient(#000 8%, transparent 8%)",
+          backgroundSize: "30px 30px",
+        }}
+      />
+
       <motion.div
-        initial={{ opacity: 1, scale: 1 }}
-        animate={{ opacity: 1, scale: 1 }}
-        transition={{ duration: 0.5 }}
-        className="max-w-4xl mx-auto bg-white shadow-2xl rounded-2xl overflow-hidden"
+        initial={{ opacity: 1, y: 1 }}
+        animate={{ opacity: 1, y: 1 }}
+        transition={{ duration: 0.5, ease: "easeOut" }}
+        className="relative top-10 max-w-5xl mx-auto bg-white/80 backdrop-blur-sm shadow-1xl rounded-3xl overflow-hidden"
       >
-        <div className="p-8">
-          <h2 className="text-3xl font-extrabold text-center text-blue-800 mb-8">
-            Multicolor Printing Price Calculator
+        <div className="p-8 space-y-6">
+          <h2 className="text-4xl font-light tracking-tight text-center text-stone-800">
+            Multicolor{" "}
+            <span className="font-bold text-blue-600">Price Calculator</span>
           </h2>
 
           <div className="grid md:grid-cols-2 gap-6">
@@ -312,22 +322,57 @@ const MulticolorSection = () => {
           <div className="mt-8">
             <button
               onClick={calculatePrice}
+              className="w-full bg-gradient-to-r from-blue-500 to-purple-600 text-white py-3 px-4 rounded-full font-medium 
+            hover:from-blue-600 hover:to-purple-700 
+            focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 
+            transition-all duration-300 ease-in-out transform hover:scale-[1.02]"
               disabled={loading}
-              className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
             >
               {loading ? "Calculating..." : "Calculate Price"}
             </button>
           </div>
 
           {calculatedPrice !== null && (
-            <div className="mt-8 text-center">
-              <p className="text-xl font-bold text-green-600">
-                Total Price: ₹{calculatedPrice}
-              </p>
-            </div>
+            <motion.div
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.4 }}
+              className="mt-8 bg-green-100/50 text-green-800 p-4 rounded-xl text-center font-bold shadow-md"
+            >
+              Total Price: ₹{calculatedPrice}
+            </motion.div>
           )}
         </div>
       </motion.div>
+
+      {/* Subtle Background Animations */}
+      <motion.div
+        className="absolute w-64 h-64 bg-blue-200 rounded-full opacity-10 blur-3xl"
+        animate={{
+          y: [0, 30, 0],
+          x: [0, -20, 0],
+        }}
+        transition={{
+          duration: 7,
+          repeat: Infinity,
+          ease: "easeInOut",
+        }}
+        style={{ top: "10%", left: "5%" }}
+      />
+
+      <motion.div
+        className="absolute w-48 h-48 bg-purple-200 rounded-full opacity-10 blur-3xl"
+        animate={{
+          y: [0, -25, 0],
+          x: [0, 25, 0],
+        }}
+        transition={{
+          duration: 6,
+          repeat: Infinity,
+          ease: "easeInOut",
+        }}
+        style={{ bottom: "15%", right: "10%" }}
+      />
     </div>
   );
 };
