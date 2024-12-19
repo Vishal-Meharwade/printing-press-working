@@ -92,7 +92,7 @@ const Home = () => {
               text-white rounded-full shadow-lg hover:shadow-xl transition-all duration-300 
               group font-semibold text-base"
             >
-              Get Started
+              Get Started Now
               <ChevronRight
                 className="group-hover:translate-x-1 transition-transform"
                 size={20}
