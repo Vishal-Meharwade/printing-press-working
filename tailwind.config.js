@@ -1,5 +1,5 @@
 /** @type {import('tailwindcss').Config} */
-module.exports = {
+export default {
   content: [
     "./index.html", // Include the Vite entry point
     "./src/**/*.{js,jsx}", // Include all your React components
@@ -9,6 +9,3 @@ module.exports = {
   },
   plugins: [],
 };
-
-
-
