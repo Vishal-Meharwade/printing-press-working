@@ -8,7 +8,7 @@ const MulticolorSection = () => {
     size: "",
     quantity: "",
     gsm: "",
-    lamination: "Yes",
+    lamination: "No",
     laminationType: "",
     laminationSides: "",
     creasing: "", // Changed to allow any custom input for creasing
@@ -68,21 +68,7 @@ const MulticolorSection = () => {
             (formData.laminationSides === "Both Sides" ? 2 : 1)
           : 0;
       const quantity = parseInt(formData.quantity, 10) || 0;
-
-      // Design price based on quantity
-      // let designPrice = 0;
-
-      // if(quantity >= 1 && quantity <= 1000) designPrice = 2500;
-
-      // if(quantity >= 1001 && quantity <= 2000) designPrice = 3500;
-
-      // if(quantity >= 2001 && quantity <= 3000) designPrice = 4500;
-
-      // if(quantity >= 3001 && quantity <= 4000) designPrice = 5500;
-
-      // if(quantity >= 4001 && quantity <= 5000) designPrice = 6500;
-      // if(quantity >= 5001 && quantity <= 6000) designPrice = 7500;
-      // if(quantity >= 6001 && quantity <= 7000) designPrice = 8500;
+      if (quantity >= 6001 && quantity <= 7000) designPrice = 8500;
 
       let designPrice = 0;
       const pricePerRange = 1000; // Price increases every 1000 units
@@ -94,43 +80,47 @@ const MulticolorSection = () => {
           Math.floor((quantity - 1) / pricePerRange),
           6
         ); // Max index for 6000 quantity (0-based, so max 6)
-        designPrice = basePrice + priceIndex * 1000;
+        designPrice = basePrice + priceIndex * 900;
       }
 
-
-
-
-
-
-      // if (quantity <= 1000 && quantity > 0) designPrice = 2500;
-      // else if (quantity >= 1001 && quantity <= 2000) designPrice = 3500;
-      // else if (quantity <= 3000) designPrice = 4500;
-      // else if (quantity > 3000)
-      //   designPrice = Math.ceil((quantity - 3000) / 1000) * 1000 + 4500;
-
-      
       let customDesignAmount = parseFloat(formData.design) || 0;
       designPrice += customDesignAmount;
-
 
       // Creasing price (custom input value is added directly)
       let creasingPrice = 0;
       if (formData.creasing && !isNaN(formData.creasing)) {
         creasingPrice = parseInt(formData.creasing, 10) || 0;
-      }      
+      }
 
-
-      // let designPrice = 0;
+      let doubleSidedPrice = 0;
+      if (formData.printingSide === "Double Side") {
+        if (quantity >= 1 && quantity <= 1000) {
+          doubleSidedPrice = 900;
+        } else if (quantity >= 1001 && quantity <= 2000) {
+          doubleSidedPrice = 900;
+        } else if (quantity >= 2001 && quantity <= 3000) {
+          doubleSidedPrice = 1800;
+        } else if (quantity >= 3001 && quantity <= 4000) {
+          doubleSidedPrice = 2700;
+        } else if (quantity >= 4001 && quantity <= 5000) {
+          doubleSidedPrice = 3600;
+        } else if (quantity >= 5001 && quantity <= 6000) {
+          doubleSidedPrice = 4500;
+        } else if (quantity >= 6001 && quantity <= 7000) {
+          doubleSidedPrice = 5400;
+        }
+      }
 
       const totalPrice =
         gsmPrice * quantity +
         laminationPrice * quantity +
         creasingPrice +
-        designPrice;
+        designPrice +
+        doubleSidedPrice;
 
       setCalculatedPrice(totalPrice || "N/A");
       setLoading(false);
-    }, 1000);
+    }, 1500);
   };
 
   const handleChange = (e) => {
@@ -290,6 +280,22 @@ const MulticolorSection = () => {
               )}
             </div>
 
+            <div>
+              <label className="block text-sm font-medium text-gray-700">
+                Printing Side
+              </label>
+              <select
+                name="printingSide" // Changed from printing-side to match React naming
+                value={formData.printingSide} // Use the new state property
+                onChange={handleChange}
+                className="mt-1 block w-full border rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+              >
+                <option value="">Select Printing side</option>
+                <option value="Single Side">Single Side</option>
+                <option value="Double Side">Double Side</option>
+              </select>
+            </div>
+
             {/* Creasing */}
             <div>
               <label className="block text-sm font-medium text-gray-700">
@@ -378,9 +384,3 @@ const MulticolorSection = () => {
 };
 
 export default MulticolorSection;
-
-
-
-
-
-
